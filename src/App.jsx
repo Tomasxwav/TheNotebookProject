@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { Displayer} from './components/Displayer'
+import { Sidebar } from './components/Sidebar'
+import Icons from './icons/Icons'
+
 import './css/styles.scss'
 
 
@@ -7,7 +10,11 @@ function App() {
   return (
     <>
     <header className='np-header'>
-      <p>The Note Project</p>
+      <p>
+        <div><Icons width='30'/>
+        The Note Project
+        </div>
+      </p>
     </header>
 
     <nav className='np-navbar'>
@@ -27,30 +34,7 @@ function App() {
     </nav>
 
 
-    <nav className='np-sidebar'>
-      <div className='np-sidebar-option'>
-        <div>ICON</div>
-        <p>Draw</p>
-      </div>
-
-      <div className='np-sidebar-option'>
-      <div>ICON</div>
-      <p>Notes</p>
-
-      </div>
-
-      <div className='np-sidebar-option'>
-      <div>ICON</div>
-      <p>Shared</p>
-
-      </div>
-
-      <div className='np-sidebar-option'>
-      <div>ICON</div>
-      <p>Meet</p>
-
-      </div>
-    </nav>
+    
     <Displayer/>
     
     </>

@@ -10,11 +10,11 @@ function App() {
   return (
     <>
     <header className='np-header'>
-      <p>
-        <div><Icons width='30'/>
+      <div>
+        <p><Icons width='30'/>
         The Note Project
-        </div>
-      </p>
+        </p>
+      </div>
     </header>
 
     <nav className='np-navbar'>

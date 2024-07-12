@@ -42,7 +42,6 @@
 
 .np-content {
     display: flex;
-    flex-direction: row-reverse;
 }
 
 .np-header {
@@ -54,7 +53,7 @@
     font-weight: lighter;
     font-size: 1.5rem;
     padding: 0.5rem 0rem;
-    div {
+    p {
         display: flex;
         gap: 0.3rem;
         align-items: center;

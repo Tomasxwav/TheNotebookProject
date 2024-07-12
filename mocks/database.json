@@ -1,0 +1,62 @@
+{
+"tomas": {
+    "folders:": {
+        "folder1": {
+            "notes": {
+                "-autoKey1": {
+                    "title": "My first note",
+                    "content": "Este es el contenido de ejemplo de mi primer JSON.",
+                    "date": "2024-06-28",
+                    "color": "#FACEFE"
+                },
+                "-autoKey2": {
+                    "title": "My first note",
+                    "content": "Este es el contenido de ejemplo de mi otro JSON.",
+                    "date": "2024-06-28",
+                    "color": "#FDFECE"
+                }
+            }
+        }
+    }
+},
+"jennifer": {
+    "folders": {
+        "folder1": {
+            "notes": {
+                "-autoKey1": {
+                    "title": "My first note",
+                    "content": "Este es el contenido de ejemplo de mi primer JSON.",
+                    "date": "2024-06-28",
+                    "color": "#FECECE"
+                },
+                "-autoKey2": {
+                    "title": "My first note",
+                    "content": "Este es el contenido de ejemplo de mi otro JSON.",
+                    "date": "2024-06-28",
+                    "color": "#CED2FE"
+                }
+            }
+        }
+    }
+},
+"spreen": {
+    "folders": {
+        "folder1": {
+            "notes": {
+                "-autoKey1": {
+                    "title": "My first note",
+                    "content": "Este es el contenido de ejemplo de mi primer JSON.",
+                    "date": "2024-06-28",
+                    "color": "#F7FECE"
+                },
+                "-autoKey2": {
+                    "title": "My first note",
+                    "content": "Este es el contenido de ejemplo de mi otro JSON.",
+                    "date": "2024-06-28",
+                    "color": "#CEFEDE"
+                }
+            }
+        }
+    }
+}
+}

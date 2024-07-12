@@ -1,6 +1,9 @@
 import PreviewNote from './PreviewNote.jsx'
 import '../css/styles.scss'
 import { Sidebar } from './Sidebar'
+import notes from "../../mocks/database.json"
+import { useState } from 'react'
+
 
 const json = [
     {
@@ -43,16 +46,21 @@ const json = [
 
 
 export function Displayer() {
-        return (
-          <div className='np-content'>
-            <div className='np-displayer'>
-                {json.map((note, index) => (
-                    <PreviewNote key={index} stickyColor={note.color} title={note.titulo}  content={note.contenido} date={note.fecha}/>
-                ))}
-                <PreviewNote />
-            </div>
-            <Sidebar/>
-          </div>
-            
-        )
+
+  let [display, setDisplay] = useState([]);
+
+
+  return (
+    <div className='np-content'>
+      <Sidebar/>
+      <div className='np-displayer'>
+          {json.map((note, index) => (
+              <PreviewNote key={index} stickyColor={note.color} title={note.titulo}  content={note.contenido} date={note.fecha}/>
+          ))}
+          <PreviewNote />
+      </div>
+      
+    </div>
+      
+  )
 }

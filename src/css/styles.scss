@@ -1,3 +1,68 @@
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    
+    background-color: #D9D9D9;
+    background-color: #242424;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+   
+  }
+  *,*::after {
+      margin: 0;
+  }
+  
+  
+  
+  .np-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #2c2c2c;
+      text-align: center;
+      font-weight: lighter;
+      font-size: 1.5rem;
+      padding: 0.5rem 0rem;
+      p {
+          display: flex;
+          gap: 0.3rem;
+          align-items: center;
+          justify-content: space-between;
+      }
+    }
+  
+  .np-navbar {
+      display: flex;
+      background-color: #2c2c2c;
+     
+      overflow:hidden;
+  
+      text-align: center;
+      font-weight: lighter;
+      font-size: 1rem;
+      padding-left: 6rem;
+      div {
+          width: 7rem;
+          background-color: #585858;
+          border: #242424;
+          border-radius: 0.5rem;
+          margin: 0.3rem;
+          transition: 0.3s all ease;
+          cursor: pointer;
+      }
+      div:hover {
+      background-color: #414040;
+      }
+  }
+    
 .np-sticky-note {
     display: flex;
     flex-direction: column;
@@ -31,6 +96,9 @@
 }
 
 
+.np-content {
+    display: flex;
+}
 .np-displayer {
     display: flex;
     gap: 3rem;
@@ -40,75 +108,31 @@
     justify-content:space-evenly;
 }
 
-.np-content {
-    display: flex;
-}
 
-.np-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #2c2c2c;
-    text-align: center;
-    font-weight: lighter;
-    font-size: 1.5rem;
-    padding: 0.5rem 0rem;
-    p {
-        display: flex;
-        gap: 0.3rem;
-        align-items: center;
-        justify-content: space-between;
-    }
-  }
-
-.np-navbar {
-    display: flex;
-    background-color: #2c2c2c;
-   
-    overflow:scroll;
-
-    text-align: center;
-    font-weight: lighter;
-    font-size: 1rem;
-    padding-left: 6rem;
-    div {
-        width: 7rem;
-        background-color: #585858;
-        border: #242424;
-        border-radius: 0.5rem;
-        margin: 0.3rem;
-        transition: 0.3s all ease;
-        cursor: pointer;
-    }
-    div:hover {
-    background-color: #414040;
-    }
-}
-  
 
 
 
 .np-sidebar {
-align-items: center;
-text-align: center;
-background-color: #2c2c2c;
-display: flex;
-flex-direction: column;
+    padding-top: 1rem;
+    align-items: center;
+    text-align: center;
+    background-color: #2c2c2c;
+    display: flex;
+    flex-direction: column;
 
-width: 10rem;
-height: 100%;
-height: auto;
-gap: 2rem;
+    gap: 2rem;
 }
 
 .np-sidebar-option {
-background-color: #585858;
-border-radius: 0.5rem;
-width: 90%;
-cursor: pointer;
-transition: 0.3s all ease;
-padding: 0.4rem 0rem;
+    background-color: #585858;
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+    transition: 0.3s all ease;
+    padding: 0.4rem;
+    width: 4rem;
+    margin: 0rem 0.4rem;
 }
 .np-sidebar-option:hover {
-background-color: #414040;
+    background-color: #414040;
 }

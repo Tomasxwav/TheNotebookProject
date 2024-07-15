@@ -4,8 +4,8 @@ export function Note() {
         <div className="np-note">
             <form action="" method="post">
                 <input type="text" placeholder="Título" />
-                <input type="textarea" placeholder="Contenido"/>
-
+                <textarea placeholder="Contenido"></textarea>
+                
             </form>
         </div>
     )

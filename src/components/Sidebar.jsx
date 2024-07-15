@@ -1,4 +1,3 @@
-import '../css/styles.scss'
 import Icons from '../icons/Icons'
 
 
@@ -13,7 +12,7 @@ export function Sidebar() {
                 <p>Draw</p>
             </a>
 
-            <a href='/' className='np-sidebar-option'>
+            <a href='/notes' className='np-sidebar-option'>
                 <div>
                     <Icons width='28' height='100px' color='white' icon='folder'/>
                 </div>

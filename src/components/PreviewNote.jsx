@@ -1,5 +1,3 @@
-import '../css/styles.scss'
-
 function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefined", date="--"}) {
     
     return (

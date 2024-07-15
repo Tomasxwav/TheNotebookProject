@@ -1,6 +1,12 @@
-<div className='np-displayer'>
-            {json.map((note, index) => (
-                <PreviewNote key={index} stickyColor={note.color} title={note.titulo}  content={note.contenido} date={note.fecha}/>
-            ))}
-            <PreviewNote />
+export function Note() {
+
+    return (
+        <div className="np-note">
+            <form action="" method="post">
+                <input type="text" placeholder="Título" />
+                <input type="textarea" placeholder="Contenido"/>
+
+            </form>
         </div>
+    )
+}

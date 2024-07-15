@@ -1,4 +1,5 @@
 import PreviewNote from './PreviewNote.jsx'
+
 import notes from "../mocks/database.json"
 const json = [
     {
@@ -42,12 +43,10 @@ const json = [
 export function Main() {
     return (
         <>
-        <div className='np-displayer'>
-            {json.map((note, index) => (
-                <PreviewNote key={index} stickyColor={note.color} title={note.titulo}  content={note.contenido} date={note.fecha}/>
-            ))}
-            <PreviewNote />
-        </div>
+        {json.map((note, index) => (
+            <PreviewNote key={index} stickyColor={note.color} title={note.titulo}  content={note.contenido} date={note.fecha}/>
+        ))}
+        <PreviewNote />
             
         </>
     )

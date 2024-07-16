@@ -18,7 +18,10 @@
   *,*::after {
       margin: 0;
   }
-  
+  a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.87);
+  }
   
   
 .np-header {
@@ -35,6 +38,19 @@
         gap: 0.3rem;
         align-items: center;
         justify-content: space-between;
+    }
+    a {
+        position: absolute;
+        right: 2rem;
+        font-size: small;
+        background-color: #585858;
+        border-radius: 0.5rem;
+        padding: 0.3rem;
+        cursor: pointer;
+        transition: 0.3s all ease;
+    }
+    a:hover {
+        background-color: #414040;
     }
 }
 
@@ -61,6 +77,31 @@
     background-color: #414040;
     }
 }
+
+.np-login {
+    background-color: #585858;
+    padding: 3rem 5rem;
+    border-radius: 1rem;
+    form {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: repeat(2, 1fr);
+        height: 100%;
+        gap: 2rem;
+        legend {
+            font-size: larger;
+        }
+        .np-login-field {
+            display: grid;
+            gap: 0rem;
+            input {
+                height: 100%;
+            }
+        }
+    }
+
+}
+
 
   
     

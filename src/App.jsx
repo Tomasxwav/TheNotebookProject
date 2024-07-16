@@ -1,22 +1,19 @@
 import { Displayer} from './components/Displayer'
 import { Headers } from './components/Headers'
+import { AuthProvider } from './context/AuthContext'
 
 import './css/styles.scss'
 
 
 function App() {
-
-
-
-
+  
   return (
-    <>
-    <Headers/>
-
-    <Displayer/>
-
+  <AuthProvider>
     
-    </>
+    <Headers/>
+    <Displayer/>
+  
+  </AuthProvider>
   )
 }
 

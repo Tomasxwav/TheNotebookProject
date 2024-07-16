@@ -1,6 +1,6 @@
-{
+{"users": {
 "tomas": {
-    "folders:": {
+    "folders": {
         "folder1": {
             "notes": {
                 "-autoKey1": {
@@ -17,6 +17,9 @@
                 }
             }
         }
+    },
+    "data": {
+        "email": "tomas_martinez14@hotmail.com"
     }
 },
 "jennifer": {
@@ -37,9 +40,12 @@
                 }
             }
         }
+    },
+    "data": {
+        "email": "jennifer@mensa.com"
     }
 },
-"spreen": {
+"prueba": {
     "folders": {
         "folder1": {
             "notes": {
@@ -57,6 +63,9 @@
                 }
             }
         }
+    },
+    "data": {
+        "email": "prueba@prueba.com"
     }
 }
-}
+}}

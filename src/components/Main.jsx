@@ -5,21 +5,13 @@ import { getDatabase, ref, get, child } from "firebase/database";
 import { useEffect, useState } from 'react';
 
 
-const db = getDatabase();
-const users = ref(db);
-
-
-let username = "tomas";
-let folder = "folder1";
-
-
-
-
 export function Main() {
   const [allNotes, setAllNotes] = useState([])
-
+  const db = getDatabase();
+  const users = ref(db);
+  let username = "tomas";
+  let folder = "folder1";
   useEffect(() => {
-    let count = 0;
     let temp = []
     get(child(users, 'users/' + username + '/folders/'))
         .then(folders => {
@@ -30,7 +22,6 @@ export function Main() {
   
               notes.forEach((note) => {
                 
-                count ++;
                 // console.log(allNotes);
                 temp.push(note.val());
                 setAllNotes(temp)
@@ -43,6 +34,8 @@ export function Main() {
   
         })
   } ,[])
+
+  console.log(allNotes);
 
   return (
       <>

@@ -16,16 +16,14 @@ export function Navbar() {
     
     get(child(folders, 'users/' + username + '/folders/'))
       .then(resp => {
-        // console.log(resp.val());
         resp.forEach(folder => {
           temp.push(folder.key)
           setAllFolders(temp)
-          // console.log(folder.key);
         })
       })
   },[])
 
-  console.log(allFolders);
+  // console.log(allFolders);
 
     return (
         <>

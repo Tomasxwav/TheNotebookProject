@@ -22,7 +22,6 @@ export function Main() {
   
               notes.forEach((note) => {
                 
-                // console.log(allNotes);
                 temp.push(note.val());
                 setAllNotes(temp)
               })
@@ -35,13 +34,12 @@ export function Main() {
         })
   } ,[])
 
-  console.log(allNotes);
+  // console.log(allNotes);
 
   return (
       <>
       {allNotes.map((note, index) => (
         note && <PreviewNote key={index} stickyColor={note.color} title={note.title}  content={note.content} date={note.date}/>
-        // <h1 key={index}>{note.title}</h1>
       ))}
       
       

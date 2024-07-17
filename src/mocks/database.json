@@ -10,7 +10,23 @@
                     "color": "#FACEFE"
                 },
                 "-autoKey2": {
-                    "title": "My first note",
+                    "title": "My second note",
+                    "content": "Este es el contenido de ejemplo de mi otro JSON.",
+                    "date": "2024-06-28",
+                    "color": "#FDFECE"
+                }
+            }
+        },
+        "folder2": {
+            "notes": {
+                "-autoKey1": {
+                    "title": "My third note",
+                    "content": "Este es el contenido de ejemplo de mi primer JSON.",
+                    "date": "2024-06-28",
+                    "color": "#FACEFE"
+                },
+                "-autoKey2": {
+                    "title": "My fourth note",
                     "content": "Este es el contenido de ejemplo de mi otro JSON.",
                     "date": "2024-06-28",
                     "color": "#FDFECE"

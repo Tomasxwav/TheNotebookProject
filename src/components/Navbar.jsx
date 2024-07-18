@@ -1,36 +1,16 @@
-import { getDatabase, ref, get, child, set } from "firebase/database";
 
-import { useEffect, useState } from 'react';
-
-const db = getDatabase()
-const folders = ref(db)
-const username = "tomas"
-
-export function Navbar() {
-  const [allFolders, setAllFolders] = useState([])
+export function Navbar({allFolders, filterbyfolder, handleFolder}) {
   
 
-
-  useEffect(() => {
-    let temp = []
-    
-    get(child(folders, 'users/' + username + '/folders/'))
-      .then(resp => {
-        resp.forEach(folder => {
-          temp.push(folder.key)
-          setAllFolders(temp)
-        })
-      })
-  },[])
-
-  // console.log(allFolders);
+  
+  // console.log("desde navbar ", filterbyfolder);
 
     return (
         <>
         <nav className='np-navbar'>
-        <div>All</div>
+        <div  style={filterbyfolder === "All" ? { backgroundColor: "#414040" } : {} } onClick={(e) => {handleFolder(e.target.innerText)}}>All</div>
         {allFolders.map((folder, index) => {
-          return folder && <div key={index}>{folder}</div>
+          return folder && <div onClick={(e) => {handleFolder(folder)}} key={index}  style={filterbyfolder === folder ? { backgroundColor: "#414040" } : {}}>{folder}</div>
         })}
       </nav>
       </>

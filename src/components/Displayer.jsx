@@ -39,14 +39,11 @@ export function Displayer() {
     // console.log(auth.currentUser.email);
     return (
       <>
-      {(currentPage == '/notes' || currentPage == '/') && <Navbar/>}
+      {/* {(currentPage == '/notes' || currentPage == '/') && <Navbar/>} */}
       <div className='np-content'>
         {currentPage != '/login' && <Sidebar/>}
-        <div className='np-displayer'>
-          {currentPage == '/draw' && <Note/>}
-          {currentPage == '/notes' && <Main/>}
-          
-        </div>
+        {currentPage == '/draw' && <Note/>}
+        {currentPage == '/notes' && <Main/>}
       </div>
       </>
     )

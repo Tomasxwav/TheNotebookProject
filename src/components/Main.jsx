@@ -1,4 +1,5 @@
 import PreviewNote from './PreviewNote.jsx'
+import { Navbar } from './Navbar.jsx';
 
 import app from '../database/connection.js';
 import { getDatabase, ref, get, child } from "firebase/database";
@@ -7,6 +8,9 @@ import { useEffect, useState } from 'react';
 
 export function Main() {
   const [allNotes, setAllNotes] = useState([])
+
+  const [filterbyfolder, setFilterbyfolder] = useState("All")
+
   const db = getDatabase();
   const users = ref(db);
   let username = "tomas";
@@ -28,7 +32,6 @@ export function Main() {
   
             })
   
-  
           })
   
         })
@@ -37,12 +40,14 @@ export function Main() {
   // console.log(allNotes);
 
   return (
-      <>
-      {allNotes.map((note, index) => (
-        note && <PreviewNote key={index} stickyColor={note.color} title={note.title}  content={note.content} date={note.date}/>
-      ))}
+      <div className='np-main'>
+        <Navbar/>
+        <div className='np-displayer'>
+          {allNotes.map((note, index) => (
+            note && <PreviewNote key={index} stickyColor={note.color} title={note.title}  content={note.content} date={note.date}/>
+          ))}
+        </div>
+      </div>
       
-      
-      </>
   )
 }

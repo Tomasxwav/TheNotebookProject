@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import Icons from '../icons/Icons'
 import { useAuth } from '../context/AuthContext'
+import { useDatabase } from '../context/CrudContext'
 
 export function Login() {
+
+
+
     const auth = useAuth()
+
+    const crud = useDatabase()
     const [accountEmail, setAccountEmail] = useState("")
     const [accountPassword, setAccountPassword] = useState("")
     const [accountUsername, setAccountUsername] = useState("")
@@ -17,15 +23,18 @@ export function Login() {
         
         if (isLogin) {
             try {
+                await crud.readUserData("reactr"); 
                 await auth.login(accountEmail, accountPassword); 
                 window.location.href = '/notes'; 
+                
             } catch (error) {
                 console.error('Error al iniciar sesión');
                 alert(error.message)
             }
         } else {
             try {
-                await auth.register(accountEmail, accountPassword); 
+                await crud.writeUserData(accountUsername, accountEmail)
+                await auth.register(accountEmail,accountUsername ,accountPassword); 
                 window.location.href = '/notes'; 
             } catch (error) {
                 console.error('Error al crear usuario');
@@ -35,7 +44,7 @@ export function Login() {
         
     }
 
-    const handleAction = async (e) => {
+    const handleAction = (e) => {
         setIsLogin(false)
         
     }
@@ -59,7 +68,7 @@ export function Login() {
             {isLogin ? <legend>Log In to your account</legend> : <legend>Create your account</legend>}
             <div className="np-login-field">
                 <label >Email:</label>
-                <input onChange={(e) => {setAccountEmail(e.target.value)}} type="text" placeholder="user123@emai.com" autoComplete='email' required/>
+                <input onChange={(e) => {setAccountEmail(e.target.value)}} type="text" placeholder="user123@emai.com" autoComplete="email" required/>
             </div>
 
             {!isLogin && (
@@ -67,7 +76,7 @@ export function Login() {
                     <label>username:</label>
                     <input
                     onChange={(e) => setAccountUsername(e.target.value)}
-                    type="text"
+                    type="text2"
                     placeholder="pablito123"
                     autoComplete="username"
                     required
@@ -79,7 +88,7 @@ export function Login() {
                 <label>Password:</label>
                 <input onChange={(e) => {setAccountPassword(e.target.value)}}  type="password" placeholder="8 characters" autoComplete='current-password' required/>
             </div>
-            <input type="submit" value="Log In" />
+            <input type="submit" value={isLogin ? "Log In" : "Sign Up"} />
         </form>
 
 

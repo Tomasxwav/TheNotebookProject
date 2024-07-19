@@ -1,31 +1,36 @@
 import PreviewNote from './PreviewNote.jsx'
 import { Navbar } from './Navbar.jsx';
-
-import app from '../database/connection.js';
 import { getDatabase, ref, get, child } from "firebase/database";
 import { useEffect, useState } from 'react';
 
 
-export function Main() {
+export function Main( {username} ) {
+  // console.log("Se Carga Main");
+  // const username = "tomas"
+  // console.log(currentUser);
+
+   
   
-
-  const handleFolder = (foldername) =>  {
-    setFilterbyfolder(foldername)
-    // console.log(foldername);
-  }
-
   const db = getDatabase();
   const users = ref(db);
-  let username = "tomas";
-
+  
+  
   const [allNotes, setAllNotes] = useState([])
   const [allFolders, setAllFolders] = useState([])
-  const [filterbyfolder, setFilterbyfolder] = useState("All")
   const [loading, setLoading] = useState(true);
+  
+  const [filterbyfolder, setFilterbyfolder] = useState("All")
+  // console.log("desde main ", filterbyfolder);
+  
+  const handleFolder = (foldername) =>  {
+    setFilterbyfolder(foldername)
+  }
+
 
   useEffect(() => {
     let tempNotes = []
     let tempFolders = []
+    // console.log("con cada click debe entrar aqui");
     get(child(users, 'users/' + username + '/folders/'))
         .then(folders => {
           
@@ -47,6 +52,13 @@ export function Main() {
           setAllFolders(tempFolders)
           setAllNotes(tempNotes)
           setLoading(false);
+          // if (user.displayName) {
+          //   setLoading(false);
+          //   // return
+          // } else {
+          //   setLoading(true);
+          //   // return
+          // }
         })
     
   } ,[filterbyfolder])
@@ -55,11 +67,11 @@ export function Main() {
 
   // console.log(allNotes);
   
-
-  if (loading) {
-    return <div className='np-main'>Loading...</div>; // Puedes personalizar esto con un spinner o algún indicador de carga
+  
+  if (loading  ) {
+    return <div className='np-main'>Loading...</div>;
   }
-  // console.log("desde main ", filterbyfolder);
+  
   return (
       <div className='np-main'>
         <Navbar allFolders={allFolders} filterbyfolder={filterbyfolder} handleFolder={handleFolder}/>

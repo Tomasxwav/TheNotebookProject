@@ -1,6 +1,5 @@
 
 export function Navbar({allFolders, filterbyfolder, handleFolder}) {
-  
 
   
   // console.log("desde navbar ", filterbyfolder);
@@ -8,9 +7,9 @@ export function Navbar({allFolders, filterbyfolder, handleFolder}) {
     return (
         <>
         <nav className='np-navbar'>
-        <div  style={filterbyfolder === "All" ? { backgroundColor: "#414040" } : {} } onClick={(e) => {handleFolder(e.target.innerText)}}>All</div>
+        <div  style={filterbyfolder === "All" ? { backgroundColor: "#414040" } : {} } onClick={(e) => {handleFolder("All")}}>All</div>
         {allFolders.map((folder, index) => {
-          return folder && <div onClick={(e) => {handleFolder(folder)}} key={index}  style={filterbyfolder === folder ? { backgroundColor: "#414040" } : {}}>{folder}</div>
+          return <div onClick={(e) => {handleFolder(folder)}} key={index}  style={filterbyfolder === folder ? { backgroundColor: "#414040" } : {}}>{folder}</div>
         })}
       </nav>
       </>

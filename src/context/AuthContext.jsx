@@ -1,6 +1,6 @@
-import app from "../database/connection";
+import app from '../database/connection'
 import React, { useState, useEffect, createContext, useContext } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, getAuth, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, getAuth, onAuthStateChanged ,updateProfile } from "firebase/auth";
 
 const auth = getAuth()
 
@@ -31,8 +31,10 @@ export function AuthProvider({children}) {
       }, []);
 
 
-    const register = async (email, password) => {
-        const response = await createUserWithEmailAndPassword(auth, email, password);
+    const register = async (email, userName, password) => {
+        const response = await createUserWithEmailAndPassword(auth, email, password)
+        await updateProfile(auth.currentUser, { displayName: userName })
+        
         console.log(response)
     };
     const login = async (email, password) => {
@@ -46,6 +48,6 @@ export function AuthProvider({children}) {
 
 
     return (<authContext.Provider value={{
-        register, login ,logout, user,
+        register, login ,logout, user
     }}>{children}</authContext.Provider>)
 }

@@ -1,29 +1,24 @@
 import app from '../database/connection'
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, getAuth, onAuthStateChanged ,updateProfile } from "firebase/auth";
+import { Headers } from '../components/Headers';
 
 const auth = getAuth()
-
 export const authContext = createContext();
 
-export const useAuth = () => {
-    const context = useContext(authContext)
-    if (!context) {
-        console.log("error creating auth context");
-    }
-    return context;
-};
 
 export function AuthProvider({children}) {
 
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState(auth.currentUser);
+
     useEffect(() => {
-        
         const logged = onAuthStateChanged(auth, (currentUser) => {
           if (!currentUser) {
             console.log("no hay usuario suscrito");
             setUser("");
           } else {
+            console.log("Ya hay usuario suscrito " +  currentUser.displayName);
+            // alert("Ya hay usuario suscrito " + currentUser.displayName);
             setUser(currentUser);
           }
         });
@@ -49,5 +44,5 @@ export function AuthProvider({children}) {
 
     return (<authContext.Provider value={{
         register, login ,logout, user
-    }}>{children}</authContext.Provider>)
+    }}>{user !== null ? children : <Headers/>}</authContext.Provider>)
 }

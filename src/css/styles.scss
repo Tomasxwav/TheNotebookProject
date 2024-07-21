@@ -196,12 +196,30 @@
 
 
 .np-note {
+    --ck-color-base-background: transparent;
+    --ck-color-base-border:transparent;
+    --ck-color-toolbar-border: transparent;
+    --ck-color-button-default-active-background: #585858;
+    --ck-color-toolbar-background: transparent;
+    --ck-color-text: transparent;
+
     background-color: #e2f188;
     height: 200vh;
     display: flex;
     flex: 1;
     width: 100%;
-
+    justify-content: center;
+    h1,h2,h3,h4,p,a,tr,td {
+        color: #000;
+    }
+    .ck.ck-reset,
+    .ck.ck-reset_all,
+    .ck-reset_all *:not(.ck-reset_all-excluded *){
+        width: 90%;
+    }
+    .ck-content, .ck-editor__editable {
+        height: 180vh;
+    }
     form {
         display: flex;
         flex: 1;
@@ -233,6 +251,10 @@
         border: none;
         color: #242424;
     }
+}
+.np-note:hover {
+    --ck-color-toolbar-background: transparent;
+    --ck-color-text: #262626;
 }
 
 .np-sticky-note {

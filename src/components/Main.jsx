@@ -1,26 +1,23 @@
 import PreviewNote from './PreviewNote.jsx'
 import { Navbar } from './Navbar.jsx';
 import { getDatabase, ref, get, child } from "firebase/database";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { authContext } from '../context/AuthContext.jsx';
 
 
-export function Main( {username} ) {
-  // console.log("Se Carga Main");
-  // const username = "tomas"
-  // console.log(currentUser);
-
-   
-  
+export function Main( ) {
+  console.log("Se Carga Main");
+  const auth = useContext(authContext)
+  const username = auth.user.displayName
+  // console.log(username);
   const db = getDatabase();
   const users = ref(db);
-  
   
   const [allNotes, setAllNotes] = useState([])
   const [allFolders, setAllFolders] = useState([])
   const [loading, setLoading] = useState(true);
   
   const [filterbyfolder, setFilterbyfolder] = useState("All")
-  // console.log("desde main ", filterbyfolder);
   
   const handleFolder = (foldername) =>  {
     setFilterbyfolder(foldername)
@@ -30,7 +27,6 @@ export function Main( {username} ) {
   useEffect(() => {
     let tempNotes = []
     let tempFolders = []
-    // console.log("con cada click debe entrar aqui");
     get(child(users, 'users/' + username + '/folders/'))
         .then(folders => {
           
@@ -52,23 +48,16 @@ export function Main( {username} ) {
           setAllFolders(tempFolders)
           setAllNotes(tempNotes)
           setLoading(false);
-          // if (user.displayName) {
-          //   setLoading(false);
-          //   // return
-          // } else {
-          //   setLoading(true);
-          //   // return
-          // }
         })
     
   } ,[filterbyfolder])
 
 
 
-  // console.log(allNotes);
+  console.log(allNotes);
   
   
-  if (loading  ) {
+  if (!username  ) {
     return <div className='np-main'>Loading...</div>;
   }
   

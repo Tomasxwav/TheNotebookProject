@@ -1,25 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Displayer} from './components/Displayer'
 import { Headers } from './components/Headers'
-import { AuthProvider } from './context/AuthContext'
+import { authContext  } from './context/AuthContext'
 import { CrudProvider } from './context/CrudContext'
 
 import './css/styles.scss'
+import { Login } from './components/Log-in'
 
 
 function App() {
-  // console.log("Se Carga App");
+  const auth = useContext(authContext)
+  const user = auth.user
+  console.log("Se Carga App");
+  // !user ? window.location.pathname = '/login' : {}
   return (
   <CrudProvider>
-  <AuthProvider>
-
-      
     <Headers/>
-    <Displayer/>
-
-  
-  </AuthProvider>
+    {user ? <Displayer/> : <Login/>}
   </CrudProvider>
+    
   )
 }
 

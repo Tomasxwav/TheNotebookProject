@@ -1,23 +1,17 @@
 import Icons from '../icons/Icons'
-import { useAuth } from "../context/AuthContext";
+import { authContext } from "../context/AuthContext";
+import { useContext } from 'react';
 
 
-
-{window.location.pathname }
 
 export function Headers() {
-    const auth = useAuth()
-    
-    // console.log(window.location.pathname);
-    // console.log(path);
-    // console.log();
+    const auth = useContext(authContext)
+    const path = window.location.pathname;
+    const isLoginPath = path === '/login';
 
     const handleLogout = () => {
         auth.logout()
     }
-    // if ('/login'.includes(window.location.pathname) ) {
-    //     return 
-    // }
     return (
         <>
         <header className='np-header'>
@@ -26,7 +20,7 @@ export function Headers() {
                 The Note Project
                 </p>
             </div> 
-            {'/login'.includes(window.location.pathname)  || <a onClick={handleLogout} href='/login'>Log out</a> }
+            {!isLoginPath && <a onClick={handleLogout} href='/login'>Log out</a> }
         </header>
         </>
     )

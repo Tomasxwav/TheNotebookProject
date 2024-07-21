@@ -1,31 +1,28 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Icons from '../icons/Icons'
-import { useAuth } from '../context/AuthContext'
+import { authContext } from '../context/AuthContext'
 import { useDatabase } from '../context/CrudContext'
+import {Link} from '../Link.jsx'
 
 export function Login() {
+    console.log("Se carga login");
 
-
-
-    const auth = useAuth()
-
+    const auth = useContext(authContext)
     const crud = useDatabase()
+
     const [accountEmail, setAccountEmail] = useState("")
     const [accountPassword, setAccountPassword] = useState("")
     const [accountUsername, setAccountUsername] = useState("")
-
-
-    const [isLogin, setIsLogin] = useState(true)
     
+    const [isLogin, setIsLogin] = useState(true)
+
     const handleLogin = async (e) => {
-        
         e.preventDefault()
-        
+    
         if (isLogin) {
             try {
-                await crud.readUserData("reactr"); 
                 await auth.login(accountEmail, accountPassword); 
-                window.location.href = '/notes'; 
+                window.location.href = '/'; 
                 
             } catch (error) {
                 console.error('Error al iniciar sesión');
@@ -35,64 +32,85 @@ export function Login() {
             try {
                 await crud.writeUserData(accountUsername, accountEmail)
                 await auth.register(accountEmail,accountUsername ,accountPassword); 
-                window.location.href = '/notes'; 
+                window.location.href = '/'; 
             } catch (error) {
                 console.error('Error al crear usuario');
                 alert(error.message)
             }
         }
-        
     }
+    
+    const handleAction = (log) => {
+        setIsLogin(log)
+    }
+        
+    return (
+    <div className="np-displayer">
+        <div className="np-login">
+            <div className="np-login-options">
 
-    const handleAction = (e) => {
-        setIsLogin(false)
+                {isLogin ? 
+                    (<button onClick={() => {handleAction(false)}}>Create Account</button>) 
+                    :
+                    (<Link onClick={() => handleAction(true)} className="np-login-return" >
+                        <Icons icon={"return"} width='100%'/>
+                    </Link>)
+                    }
+
+            </div>
+
+            <form onSubmit={(e) => handleLogin(e)} >
+                {isLogin ? <legend>Log In to your account</legend> : <legend>Create your account</legend>}
+
+                <div className="np-login-field">
+                    <label >Email:</label>
+                    <input 
+                    onChange={(e) => {setAccountEmail(e.target.value)}} 
+                    type="text" 
+                    placeholder="user123@emai.com" 
+                    autoComplete="email" 
+                    writingsuggestions="true"
+                    required
+                    />
+                </div>
+
+                {!isLogin && (
+                    <div className="np-login-field">
+                        <label>username:</label>
+                        <input
+                        onChange={(e) => setAccountUsername(e.target.value)}
+                        type="text2"
+                        writingsuggestions="true"
+                        placeholder="pablito123"
+                        autoComplete="username"
+                        required
+                        />
+                    </div>
+                    )}
+
+                <div className="np-login-field">
+                    <label>Password:</label>
+                    <input 
+                    onChange={(e) => {setAccountPassword(e.target.value)}}  
+                    type="password" 
+                    writingsuggestions="true"
+                    placeholder="8 characters" 
+                    autoComplete='current-password' 
+                    required
+                    />
+                </div>
+
+                <input writingsuggestions="true" type="submit" value={isLogin ? "Log In" : "Sign Up"} />
+            </form>
+
+        </div>
+    </div>
+)}
+
         
-    }
+
+        
 
 
     
 
-    return (
-    <div className="np-login">
-
-        <div className="np-login-options">
-            {isLogin && <button onClick={handleAction}>Create Account</button>}
-            {!isLogin && (<a className="np-login-return" href="">
-                <Icons icon={"return"} width='100%'/>
-            </a>)}
-        </div>
-
-
-
-        <form onSubmit={(e) => handleLogin(e)} >
-            {isLogin ? <legend>Log In to your account</legend> : <legend>Create your account</legend>}
-            <div className="np-login-field">
-                <label >Email:</label>
-                <input onChange={(e) => {setAccountEmail(e.target.value)}} type="text" placeholder="user123@emai.com" autoComplete="email" required/>
-            </div>
-
-            {!isLogin && (
-                <div className="np-login-field">
-                    <label>username:</label>
-                    <input
-                    onChange={(e) => setAccountUsername(e.target.value)}
-                    type="text2"
-                    placeholder="pablito123"
-                    autoComplete="username"
-                    required
-                    />
-                </div>
-                )}
-
-            <div className="np-login-field">
-                <label>Password:</label>
-                <input onChange={(e) => {setAccountPassword(e.target.value)}}  type="password" placeholder="8 characters" autoComplete='current-password' required/>
-            </div>
-            <input type="submit" value={isLogin ? "Log In" : "Sign Up"} />
-        </form>
-
-
-
-    </div>
-    )
-}

@@ -98,8 +98,8 @@ export function CrudProvider ({ children }) {
           .then(() => {
             const oldTitle = oldPath.split("/").slice(-1)[0];
             const path = oldPath.split(oldTitle)[0];
-            // console.log(path, oldTitle);
-            // deleteUserNote(name,oldTitle,path)
+            console.log(path, oldTitle);
+            deleteUserNote(name,oldTitle,path)
           })
         }
       }

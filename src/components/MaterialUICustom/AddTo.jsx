@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 export default function AddTo({allFolders, currentFolder, handleChange, handleDialogClose, openDialog}) {
-    console.log(currentFolder);
+    // console.log(currentFolder);
   return (
     <Dialog
         open={openDialog}

@@ -1,14 +1,15 @@
 import { useState, useContext, useEffect } from 'react'
 import Icons from '../icons/Icons'
 import { authContext } from '../context/AuthContext'
-import { useDatabase } from '../context/CrudContext'
+import { crudContext } from '../context/CrudContext'
 import {Link} from '../Link.jsx'
+
 
 export function Login() {
     console.log("Se carga login");
-
     const auth = useContext(authContext)
-    const crud = useDatabase()
+    const crud = useContext(crudContext)
+    console.log(2, auth.user);
 
     const [accountEmail, setAccountEmail] = useState("")
     const [accountPassword, setAccountPassword] = useState("")
@@ -21,7 +22,10 @@ export function Login() {
     
         if (isLogin) {
             try {
-                await auth.login(accountEmail, accountPassword); 
+                const log = await auth.login(accountEmail, accountPassword); 
+                const user = await crud.readUserData(log.user.displayName)
+                console.log(user);
+                alert("Bienvenido " + user.username);
                 window.location.href = '/'; 
                 
             } catch (error) {

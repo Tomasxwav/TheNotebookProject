@@ -1,10 +1,17 @@
 import '../css/styles.scss'
 import { useContext} from 'react'
 import { authContext } from '../context/AuthContext.jsx';
+import Alert from '@mui/material/Alert';
+import { styled } from '@mui/system';
 
 import {Footer} from './Footer'
 import { routes } from '../mocks/routes.js';
 import Router from '../Router/Router.jsx'
+
+const FixedAlert = styled(Alert)({
+  position: 'fixed',
+  transform: 'scale(70%)'
+});
 
 
 export function Displayer() {
@@ -14,7 +21,7 @@ export function Displayer() {
     return (
       <>
         <Router routes={routes}  />
-        {import.meta.env.DEV && <Footer/>} 
+        {import.meta.env.DEV && (<FixedAlert variant="filled" style={{ bottom: '0.3rem', left: '-1rem'}} severity="info">Dev Mode</FixedAlert>)} 
       </>
     )
 

@@ -216,40 +216,10 @@
     .ck.ck-reset_all,
     .ck-reset_all *:not(.ck-reset_all-excluded *){
         width: 90%;
+        // flex: 1;
     }
     .ck-content, .ck-editor__editable {
         height: 180vh;
-    }
-    form {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-        margin-top: 2rem;
-
-    }
-    input {
-        background-color: #e2f188;
-        border: none;
-        color: #242424;
-    }
-    input[type='text'] {
-        width: 50%;
-        height: 2rem;
-        font-size: larger;
-        font-weight: bolder;
-        text-align: center;
-    }
-    textarea {
-        background-color: #e2f188;
-        width: calc(100% - 3rem);
-        height: calc(100% - 13rem);
-        
-        display: flex;
-        background-color: #e2f188;
-        border: none;
-        color: #242424;
     }
 }
 .np-note:hover {
@@ -288,3 +258,4 @@
 .np-sticky-note:hover {
     transform: scale(110%);
 }
+

@@ -5,7 +5,7 @@ export function Sidebar() {
     return (
         <>
         <nav className='np-sidebar'>
-            <Link to={'/draw'} state={{ isNewNote: true, caca: "si" }} className='np-sidebar-option' style={{backgroundColor: "#FECECE", color: 'black'}}>
+            <Link to={'/draw'} state={{ isNewNote: true}} className='np-sidebar-option' style={{backgroundColor: "#FECECE", color: 'black'}}>
                 <div>
                     <Icons width='28' height='100px' color='black' icon='pencil'/>
                 </div>

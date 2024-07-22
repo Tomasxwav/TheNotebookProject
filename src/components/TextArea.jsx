@@ -29,7 +29,7 @@ import {
   export function TextArea ({handleContent}) {
     console.log("Se carga TextArea");
     
-    function saveData(data) {
+    let saveData = (data) => {
         handleContent(data)
     }
 
@@ -71,7 +71,7 @@ import {
         // data='<p>Hello fro the first editor working with the context!</p>'
         onReady={ ( editor ) => {
 
-        //   console.log( 'Editor 1 is ready to use!', editor );
+          // console.log( 'Editor 1 is ready to use!', editor );
         } }
       />
     </CKEditorContext>

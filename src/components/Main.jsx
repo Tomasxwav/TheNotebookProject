@@ -6,10 +6,10 @@ import { authContext } from '../context/AuthContext.jsx';
 
 
 export function Main( ) {
-  console.log("Se Carga Main");
+  console.log('Se carga el Main');
+  
   const auth = useContext(authContext)
   const username = auth.user.displayName
-  // console.log(username);
   const db = getDatabase();
   const users = ref(db);
   
@@ -19,42 +19,39 @@ export function Main( ) {
   
   const [filterbyfolder, setFilterbyfolder] = useState("All")
   
-  const handleFolder = (foldername) =>  {
-    setFilterbyfolder(foldername)
-  }
-
-
+  
   useEffect(() => {
     let tempNotes = []
     let tempFolders = []
     get(child(users, 'users/' + username + '/folders/'))
-        .then(folders => {
-          
-          folders.forEach(folder => {
-            tempFolders.push(folder.key)
-            if (filterbyfolder === "All" || filterbyfolder === folder.key) {
-              folder.forEach(notes => {
-
-                notes.forEach((note) => {
-                  
-                  tempNotes.push(note.val()) ;
-
-                })
-    
-              })
-            }
-  
+    .then(folders => {
+      
+      folders.forEach(folder => {
+        tempFolders.push(folder.key)
+        if (filterbyfolder === "All" || filterbyfolder === folder.key) {
+          folder.forEach(notes => {
+            
+            notes.forEach((note) => {
+              
+              tempNotes.push(note.val()) ;
+              
+            })
+            
           })
-          setAllFolders(tempFolders)
-          setAllNotes(tempNotes)
-          setLoading(false);
-        })
-    
+        }
+        
+      })
+      setAllFolders(tempFolders)
+      setAllNotes(tempNotes)
+      setLoading(false);
+    })
   } ,[filterbyfolder])
-
-
-
-  console.log(allNotes);
+  
+  const handleFolder = (foldername) =>  {
+    setFilterbyfolder(foldername)
+  }
+  
+  
   
   
   if (!username  ) {

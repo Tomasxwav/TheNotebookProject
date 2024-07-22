@@ -1,12 +1,11 @@
-export function navigate (href) {
-    window.history.pushState({}, '', href)
+export function navigate (href, state = {}) {
+    window.history.pushState(state, '', href)
     const navigateEvent = new Event('pushState')
     window.dispatchEvent(navigateEvent)
   }
 
                                   
-export function Link ({target, to, ...atributes}) {
-    // console.log(atributes);
+export function Link ({target, to, state = {}, ...atributes}) {
     const handleClick = (event) => {
 
         const isMainEvent = event.button === 0;
@@ -15,8 +14,7 @@ export function Link ({target, to, ...atributes}) {
 
         if ( isMainEvent && isManageableEvent && !isModifiedEvent) {
             event.preventDefault()
-
-            navigate(to) 
+            navigate(to, state) 
         }
     
     }

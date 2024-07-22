@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react"
+import { NoteProvider } from '../context/NoteContext'
 import { CircularProgress } from '@mui/material';
 import {Sidebar} from '../components/Sidebar.jsx'
 
 export default  function Router({routes = []}) {
-    const [currentPage, setCurrentPage] = useState(window.location.pathname)
+    const [currentPage, setCurrentPage] = useState({
+        path: window.location.pathname,
+        state: window.history.state,
+    });
 
     useEffect(() => {
         const onLocationChange = () => {
-            setCurrentPage(window.location.pathname)
+            setCurrentPage({
+                path: window.location.pathname,
+                state: window.history.state,
+            });
         }
         window.addEventListener('pushState', onLocationChange)
         window.addEventListener('popstate', onLocationChange)
@@ -19,12 +26,14 @@ export default  function Router({routes = []}) {
 
     },[])
 
-    const Page = routes.find(({path}) => path === currentPage)?.Component
+    const Page = routes.find(({path}) => path === currentPage.path)?.Component
     // console.log(Page==='/Main');
     return (
         Page ? (<div className="np-content">
             <Sidebar/>
-            <Page/>
+            <NoteProvider>
+                <Page state={currentPage.state}/>
+            </NoteProvider>
             </div>
          ): (<div align='center'><CircularProgress/></div>)
     )

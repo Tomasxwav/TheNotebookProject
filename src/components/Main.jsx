@@ -17,7 +17,7 @@ export function Main( ) {
   const [allInfo, setAllInfo] = useState([]);
   
   const [filterbyfolder, setFilterbyfolder] = useState("All")
-  
+  const [areChanges, setAreChanges] = useState()
   
   useEffect(() => {
     let tempInfo = []
@@ -44,7 +44,7 @@ export function Main( ) {
       setAllFolders(tempFolders)
       setAllInfo(tempInfo)
     })
-  } ,[filterbyfolder])
+  } ,[filterbyfolder, areChanges])
 
   const handleFolder = (foldername) =>  {
     setFilterbyfolder(foldername)
@@ -60,7 +60,7 @@ export function Main( ) {
         <Navbar allFolders={allFolders} filterbyfolder={filterbyfolder} handleFolder={handleFolder}/>
         <div className='np-displayer'>
           {allInfo.map(({note, folder}, index) => (
-            note && <PreviewNote key={index} stickyColor={note.color} title={note.title}  content={note.content} date={note.date} note={note} folder={folder}/>
+            note && <PreviewNote key={index} stickyColor={note.color} title={note.title}  content={note.content} date={note.date} note={note} folder={folder} areChanges={areChanges} setAreChanges={setAreChanges} allFolders={allFolders}/>
           ))}
         </div>
       </div>

@@ -43,7 +43,9 @@ export function Note({state}) {
                 setTempTitle(contentArr[0])
                 const title = contentArr[0]
                 const date = new Date().toDateString()
-                crud.updateUserNote(username, folder ,tempTitle, title, allContent, date)
+                const oldPath = `folders/${folder}/notes/${tempTitle}`
+                const newPath = `folders/${folder}/notes/${title}`
+                crud.updateUserNote(username, oldPath ,newPath,title, allContent, date)
                 console.log("El titulo era ", tempTitle);
                 console.log("El titulo nuevo es ", title);
             }

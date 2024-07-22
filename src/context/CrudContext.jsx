@@ -71,13 +71,14 @@ export function CrudProvider ({ children }) {
   
     
   //Edit User Note
-  const updateUserNote = async(name, folder, oldTitle, title , content, date) => {
-    const respose = await get(ref(db, `users/${name}/folders/${folder}/notes/${oldTitle}`));
+  // const updateUserNote = async(name, folder, oldTitle, title , content, date) => {
+  const updateUserNote = async(name, oldPath, newPath, title , content, date) => {
+    const respose = await get(ref(db, `users/${name}/${oldPath}`));
     if (respose.exists()) {
       const data = respose.val();
       console.log(data);
-      if(title === oldTitle) {
-        await set(child(ref(db), `users/${name}/folders/${folder}/notes/${title}/`), {
+      if(newPath === oldPath) {
+        await set(child(ref(db), `users/${name}/${newPath}/`), {
           // userId: userId,
           title: title,
           content: content,
@@ -86,22 +87,28 @@ export function CrudProvider ({ children }) {
           });
       } else {
         console.log("El titulo es diferente, debe de cambiar");
-        const path=`folders/${folder}/notes`
-        await set(child(ref(db), `users/${name}/folders/${folder}/notes/${title}/`), {
+        // const path=`folders/${folder}/notes`
+        await set(child(ref(db), `users/${name}/${newPath}/`), {
           // userId: userId,
           title: title,
           content: content,
           date : date,
           color: '#F6AEA0'
-          }).then(removeUserNote(name,oldTitle,path))
+          })
+          .then(() => {
+            const oldTitle = oldPath.split("/").slice(-1)[0];
+            const path = oldPath.split(oldTitle)[0];
+            // console.log(path, oldTitle);
+            // deleteUserNote(name,oldTitle,path)
+          })
         }
       }
     }
 
     //Remove user note
-    const removeUserNote = async (name, key, path) => {
+    const deleteUserNote = async (name, key, path) => {
       await remove(child(ref(db),  `users/${name}/${path}/${key}`))
     }
 
-    return <crudContext.Provider value={{writeUserData, createUserFolder, createUserNote, readUserData, readUserFolder, updateUserNote}}>{children}</crudContext.Provider>
+    return <crudContext.Provider value={{writeUserData, createUserFolder, createUserNote, readUserData, readUserFolder, updateUserNote, deleteUserNote}}>{children}</crudContext.Provider>
 }

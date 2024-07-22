@@ -237,7 +237,7 @@
     text-align: center;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 20%, 20% 0);
     opacity: 90%;
-    cursor: pointer;
+    
     transition: 0.3s all ease;
     font-size: small;
     .np-sn-icon {
@@ -256,6 +256,7 @@
     }
     .np-sticky-note-content {
         height: 100%;
+        cursor: pointer;
     }
 }
 .np-sticky-note::before {

@@ -6,13 +6,12 @@ export function navigate (href, state = {}) {
    
 export function Link ({target, to, state = {}, ...atributes}) {
     const handleClick = (event) => {
-
         const isMainEvent = event.button === 0;
         const isModifiedEvent = event.metaKey || event.altKey || event.ctrlKey || event.shiftKey
         const isManageableEvent = target === undefined || target === '_self'
-
+        
         if ( isMainEvent && isManageableEvent && !isModifiedEvent) {
-            event.preventDefault()
+            event.preventDefault();
             navigate(to, state) 
         }
     

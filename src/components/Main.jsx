@@ -12,16 +12,15 @@ export function Main( ) {
   const username = auth.user.displayName
   const db = getDatabase();
   const users = ref(db);
-  
-  const [allNotes, setAllNotes] = useState([])
+
   const [allFolders, setAllFolders] = useState([])
-  const [loading, setLoading] = useState(true);
+  const [allInfo, setAllInfo] = useState([]);
   
   const [filterbyfolder, setFilterbyfolder] = useState("All")
   
   
   useEffect(() => {
-    let tempNotes = []
+    let tempInfo = []
     let tempFolders = []
     get(child(users, 'users/' + username + '/folders/'))
     .then(folders => {
@@ -29,11 +28,12 @@ export function Main( ) {
       folders.forEach(folder => {
         tempFolders.push(folder.key)
         if (filterbyfolder === "All" || filterbyfolder === folder.key) {
+          
           folder.forEach(notes => {
             
             notes.forEach((note) => {
               
-              tempNotes.push(note.val()) ;
+              tempInfo.push({note: note.val(), folder: folder.key}) ;
               
             })
             
@@ -42,11 +42,10 @@ export function Main( ) {
         
       })
       setAllFolders(tempFolders)
-      setAllNotes(tempNotes)
-      setLoading(false);
+      setAllInfo(tempInfo)
     })
   } ,[filterbyfolder])
-  
+  // console.log(allInfo);
   const handleFolder = (foldername) =>  {
     setFilterbyfolder(foldername)
   }
@@ -62,8 +61,8 @@ export function Main( ) {
       <div className='np-main'>
         <Navbar allFolders={allFolders} filterbyfolder={filterbyfolder} handleFolder={handleFolder}/>
         <div className='np-displayer'>
-          {allNotes.map((note, index) => (
-            note && <PreviewNote key={index} stickyColor={note.color} title={note.title}  content={note.content} date={note.date}/>
+          {allInfo.map(({note, folder}, index) => (
+            note && <PreviewNote key={index} stickyColor={note.color} title={note.title}  content={note.content} date={note.date} note={note} folder={folder}/>
           ))}
         </div>
       </div>

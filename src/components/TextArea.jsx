@@ -26,7 +26,7 @@ import {
 
 
 
-  export function TextArea ({handleContent}) {
+  export function TextArea ({handleContent, note={content: '<h1>This is a default Title!</h1><p>This is a default content</p>'}}) {
     console.log("Se carga TextArea");
     
     let saveData = (data) => {
@@ -61,7 +61,7 @@ import {
             Undo,
             Autosave
           ],
-          initialData: '<h1>This is a default Title!</h1><p>This is a default content</p>',
+          initialData: note.content,
           autosave: {
             save( editor ) {
                 return saveData( editor.getData() );

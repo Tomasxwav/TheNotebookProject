@@ -1,5 +1,5 @@
 import app from "../database/connection";
-import { getDatabase, set, ref, get, child, push } from "firebase/database";
+import { getDatabase, set, ref, get, child, push, remove } from "firebase/database";
 import { createContext, useContext, useEffect, useState } from "react";
 
 export const crudContext = createContext()
@@ -64,11 +64,47 @@ export function CrudProvider ({ children }) {
       // userId: userId,
       title: title,
       content: content,
-      date : date
-    });
+      date : date,
+      color: '#FDFECE'
+      });
+    }
+  
+  //Edit User Note
+  
+  const updateUserNote = async(name, folder, oldTitle, title , content, date) => {
+    const respose = await get(ref(db, `users/${name}/folders/${folder}/notes/${oldTitle}`));
+    if (respose.exists()) {
+      const data = respose.val();
+      console.log(data);
+      if(title === oldTitle) {
+        await set(child(ref(db), `users/${name}/folders/${folder}/notes/${title}/`), {
+          // userId: userId,
+          title: title,
+          content: content,
+          date : date,
+          color: '#A0F6F0'
+          });
+      } else {
+        console.log("El titulo es diferente, debe de cambiar");
+        const path=`folders/${folder}/notes`
+        await set(child(ref(db), `users/${name}/folders/${folder}/notes/${title}/`), {
+          // userId: userId,
+          title: title,
+          content: content,
+          date : date,
+          color: '#F6AEA0'
+          }).then(removeUserNote(name,oldTitle,path))
+          // }))
+        
+        
+        }
+      }
     }
 
+    //Remove user note
+    const removeUserNote = async (name, key, path) => {
+      await remove(child(ref(db),  `users/${name}/${path}/${key}`))
+    }
 
-
-    return <crudContext.Provider value={{writeUserData, createUserFolder, createUserNote, readUserData, readUserFolder}}>{children}</crudContext.Provider>
+    return <crudContext.Provider value={{writeUserData, createUserFolder, createUserNote, readUserData, readUserFolder, updateUserNote}}>{children}</crudContext.Provider>
 }

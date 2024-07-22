@@ -4,7 +4,6 @@ import { authContext } from '../context/AuthContext.jsx';
 import Alert from '@mui/material/Alert';
 import { styled } from '@mui/system';
 
-import {Footer} from './Footer'
 import { routes } from '../mocks/routes.js';
 import Router from '../Router/Router.jsx'
 

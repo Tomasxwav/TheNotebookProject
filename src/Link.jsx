@@ -3,8 +3,7 @@ export function navigate (href, state = {}) {
     const navigateEvent = new Event('pushState')
     window.dispatchEvent(navigateEvent)
   }
-
-                                  
+   
 export function Link ({target, to, state = {}, ...atributes}) {
     const handleClick = (event) => {
 

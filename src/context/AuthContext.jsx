@@ -6,7 +6,6 @@ import { Headers } from '../components/Headers';
 const auth = getAuth()
 export const authContext = createContext();
 
-
 export function AuthProvider({children}) {
 
     const [user, setUser] = useState(auth.currentUser);
@@ -18,7 +17,6 @@ export function AuthProvider({children}) {
             setUser("");
           } else {
             console.log("Ya hay usuario suscrito " +  currentUser.displayName);
-            // alert("Ya hay usuario suscrito " + currentUser.displayName);
             setUser(currentUser);
           }
         });

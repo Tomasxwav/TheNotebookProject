@@ -69,8 +69,8 @@ export function CrudProvider ({ children }) {
       });
     }
   
+    
   //Edit User Note
-  
   const updateUserNote = async(name, folder, oldTitle, title , content, date) => {
     const respose = await get(ref(db, `users/${name}/folders/${folder}/notes/${oldTitle}`));
     if (respose.exists()) {
@@ -94,9 +94,6 @@ export function CrudProvider ({ children }) {
           date : date,
           color: '#F6AEA0'
           }).then(removeUserNote(name,oldTitle,path))
-          // }))
-        
-        
         }
       }
     }

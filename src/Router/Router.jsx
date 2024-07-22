@@ -27,7 +27,6 @@ export default  function Router({routes = []}) {
     },[])
 
     const Page = routes.find(({path}) => path === currentPage.path)?.Component
-    // console.log(Page==='/Main');
     return (
         Page ? (<div className="np-content">
             <Sidebar/>

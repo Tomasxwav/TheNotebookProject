@@ -45,12 +45,10 @@ export function Main( ) {
       setAllInfo(tempInfo)
     })
   } ,[filterbyfolder])
-  // console.log(allInfo);
+
   const handleFolder = (foldername) =>  {
     setFilterbyfolder(foldername)
   }
-  
-  
   
   
   if (!username  ) {

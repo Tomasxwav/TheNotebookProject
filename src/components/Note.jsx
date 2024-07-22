@@ -9,7 +9,6 @@ export function Note({state}) {
 
     const [allContent, setAllContent] = useState();
     const [tempTitle, setTempTitle] = useState(state.note);
-    console.log(state.folder);
     useEffect(() => {
         if (state.note !== undefined) {
             setTempTitle(state.note.title)
@@ -31,14 +30,10 @@ export function Note({state}) {
         if(allContent) {
             console.log(allContent);
             if(isNewNote) {
-                // const content = allContent.substring(1).split(">")[0]
+                console.log("La nota es nueva y cambia, entonces deja de serlo y se guarda ");
                 const contentArr = allContent.split(/<\/?[^>]+>/).filter(Boolean);
-                // const title = allContent.split("<" + firstElement + ">")[1].split("</"+ firstElement + ">")[0];
                 const title = contentArr[0]
-                console.log("La nota es nueva y cambia entonces deja de serlo y se guarda " , title);
                 const date = new Date().toDateString()
-                console.log(title);
-                //Aqui se debe de guardar
                 crud.createUserNote(username, title, allContent, date);
                 setIsNewNote(false)
             } else {
@@ -48,10 +43,9 @@ export function Note({state}) {
                 setTempTitle(contentArr[0])
                 const title = contentArr[0]
                 const date = new Date().toDateString()
-                console.log("El titulo nuevo es ", title);
                 crud.updateUserNote(username, folder ,tempTitle, title, allContent, date)
                 console.log("El titulo era ", tempTitle);
-
+                console.log("El titulo nuevo es ", title);
             }
         }
     },[allContent])

@@ -40,6 +40,7 @@ export function Note({state}) {
                 console.log("La nota ya ha sido guardada, se actualiza...");
                 const folder = state.folder;
                 const contentArr = allContent.split(/<\/?[^>]+>/).filter(Boolean);
+                // console.log(contentArr.map(dato => {dato.replace(/&nbsp;/g, "")}));
                 setTempTitle(contentArr[0])
                 const title = contentArr[0]
                 const date = new Date().toDateString()

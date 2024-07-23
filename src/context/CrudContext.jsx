@@ -71,35 +71,31 @@ export function CrudProvider ({ children }) {
   
     
   //Edit User Note
-  // const updateUserNote = async(name, folder, oldTitle, title , content, date) => {
   const updateUserNote = async(name, oldPath, newPath, title , content, date) => {
-    const respose = await get(ref(db, `users/${name}/${oldPath}`));
-    if (respose.exists()) {
-      const data = respose.val();
-      console.log(data);
-      if(newPath === oldPath) {
-        await set(child(ref(db), `users/${name}/${newPath}/`), {
-          // userId: userId,
-          title: title,
-          content: content,
-          date : date,
-          color: "#F2C6FF"
-          });
-      } else {
-        console.log("El titulo es diferente, debe de cambiar");
-        // const path=`folders/${folder}/notes`
-        await set(child(ref(db), `users/${name}/${newPath}/`), {
-          // userId: userId,
-          title: title,
-          content: content,
-          date : date,
-          color: "#F7FECE"
-          })
-          .then(() => {
-            deleteUserNote(name,oldPath)
-          })
+    await get(ref(db, `users/${name}/${oldPath}`)).then(response => {
+      if (response.exists()) {
+        if(newPath === oldPath) {
+          set(child(ref(db), `users/${name}/${newPath}/`), {
+            // userId: userId,
+            title: title,
+            content: content,
+            date : date,
+            color: "#F2C6FF"
+            });
+        } else {
+          console.log("El titulo es diferente, debe de cambiar");
+          set(child(ref(db), `users/${name}/${newPath}/`), {
+            // userId: userId,
+            title: title,
+            content: content,
+            date : date,
+            color: "#F7FECE"
+            })
+              deleteUserNote(name,oldPath)
+          }
         }
-      }
+      else alert("There are not response")
+    });
     }
 
     //Remove user note

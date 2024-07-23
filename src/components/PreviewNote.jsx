@@ -34,12 +34,11 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
     };
     const handleChange = async (newFolder) => {
         setOpenDialog(false)
-        const oldPath = `folders/${folder}/notes/${note.title}`
-        const newPath = `folders/${newFolder}/notes/${note.title}`
+        const oldPath = `folders/${folder}/notes/${note.title.substring(0,30)}`
+        const newPath = `folders/${newFolder}/notes/${note.title.substring(0,30)}`
 
         console.log("La carpeta deberia moverse de ", folder, " a ", newFolder);
-        await crud.updateUserNote(auth.user.displayName, oldPath ,newPath,note.title , note.content, note.date)
-        setAreChanges(!areChanges)
+        await crud.updateUserNote(auth.user.displayName, oldPath ,newPath,note.title , note.content, note.date).then(()=>{setAreChanges(!areChanges)})
     }
     const handleDialogClose = () => {
         setOpenDialog(false);
@@ -49,8 +48,7 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
         setIsAddingFolder(true)
     }
 
-
-    const previewContent = content.replace(/&nbsp;/g, " ").split(/<\/?[^>]+>/).filter(Boolean)
+    const previewContent = content.replace(/&nbsp;/g, "").split(/<\/?[^>]+>/).filter(Boolean)
     return (
         <div className="np-sticky-note" style={{backgroundColor: stickyColor}}>
         <Stack className="np-sn-icon" direction="row" spacing={0}>

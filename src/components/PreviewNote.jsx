@@ -15,7 +15,7 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
     const auth = useContext(authContext)
     const [openAlert, setOpenAlert] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
-
+    const [isAddingFolder, setIsAddingFolder] = useState(false)
     
     const handleClickOpen = () => {
         setOpenAlert(true);
@@ -24,7 +24,7 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
         setOpenAlert(false);
     };
     const handleConfirmAlert = async () => {
-        await crud.deleteUserNote(auth.user.displayName,note.title,`folders/${folder}/notes`)
+        await crud.deleteUserNote(auth.user.displayName,`folders/${folder}/notes/${note.title}`)
         setAreChanges(!areChanges)
         setOpenAlert(false);
         alert('Deleted');
@@ -32,8 +32,7 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
     const handleDialogOpen = () => {
         setOpenDialog(true);
     };
-    const handleChange = async (e) => {
-        const newFolder = e.nativeEvent.srcElement.value;
+    const handleChange = async (newFolder) => {
         setOpenDialog(false)
         const oldPath = `folders/${folder}/notes/${note.title}`
         const newPath = `folders/${newFolder}/notes/${note.title}`
@@ -44,8 +43,11 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
     }
     const handleDialogClose = () => {
         setOpenDialog(false);
+        setIsAddingFolder(false)
     };
-    // console.log(openAlert);
+    const handleAddFolder=() =>{
+        setIsAddingFolder(true)
+    }
 
 
     const previewContent = content.replace(/&nbsp;/g, " ").split(/<\/?[^>]+>/).filter(Boolean)
@@ -60,7 +62,7 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
             </IconButton>
         </Stack>
 
-        <AddTo allFolders={allFolders} currentFolder={folder} handleChange={handleChange} handleDialogClose={handleDialogClose} openDialog={openDialog}/>
+        <AddTo allFolders={allFolders} currentFolder={folder} handleChange={handleChange} handleDialogClose={handleDialogClose} openDialog={openDialog} isAddingFolder={isAddingFolder} handleAddFolder={handleAddFolder}/>
 
         <DeleteDialog folders={folder} handleClickOpen={handleClickOpen} handleClose={handleClose} handleConfirmAlert={handleConfirmAlert} openAlert={openAlert}/> 
 

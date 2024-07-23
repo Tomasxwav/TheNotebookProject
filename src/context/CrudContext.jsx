@@ -65,7 +65,7 @@ export function CrudProvider ({ children }) {
       title: title,
       content: content,
       date : date,
-      color: '#FDFECE'
+      color: "#CEFEDE"
       });
     }
   
@@ -83,7 +83,7 @@ export function CrudProvider ({ children }) {
           title: title,
           content: content,
           date : date,
-          color: '#A0F6F0'
+          color: "#F2C6FF"
           });
       } else {
         console.log("El titulo es diferente, debe de cambiar");
@@ -93,21 +93,18 @@ export function CrudProvider ({ children }) {
           title: title,
           content: content,
           date : date,
-          color: '#F6AEA0'
+          color: "#F7FECE"
           })
           .then(() => {
-            const oldTitle = oldPath.split("/").slice(-1)[0];
-            const path = oldPath.split(oldTitle)[0];
-            console.log(path, oldTitle);
-            deleteUserNote(name,oldTitle,path)
+            deleteUserNote(name,oldPath)
           })
         }
       }
     }
 
     //Remove user note
-    const deleteUserNote = async (name, key, path) => {
-      await remove(child(ref(db),  `users/${name}/${path}/${key}`))
+    const deleteUserNote = async (name, path) => {
+      await remove(child(ref(db),  `users/${name}/${path}/`))
     }
 
     return <crudContext.Provider value={{writeUserData, createUserFolder, createUserNote, readUserData, readUserFolder, updateUserNote, deleteUserNote}}>{children}</crudContext.Provider>

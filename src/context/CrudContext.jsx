@@ -62,7 +62,7 @@ export function CrudProvider ({ children }) {
   const createUserNote = async(name, title, content, date) => {
     await set(child(ref(db), 'users/' + name + '/folders/unasigned/notes/' + title.substring(0,30)), {
       // userId: userId,
-      title: title,
+      title: title.substring(0,30),
       content: content,
       date : date,
       color: "#CEFEDE"
@@ -77,7 +77,7 @@ export function CrudProvider ({ children }) {
         if(newPath === oldPath) {
           set(child(ref(db), `users/${name}/${newPath}/`), {
             // userId: userId,
-            title: title,
+            title: title.substring(0,30),
             content: content,
             date : date,
             color: "#F2C6FF"
@@ -86,7 +86,7 @@ export function CrudProvider ({ children }) {
           console.log("El titulo es diferente, debe de cambiar");
           set(child(ref(db), `users/${name}/${newPath}/`), {
             // userId: userId,
-            title: title,
+            title: title.substring(0,30),
             content: content,
             date : date,
             color: "#F7FECE"

@@ -9,7 +9,7 @@ import { crudContext } from "../context/CrudContext";
 import { authContext } from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 
-function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefined", date="--", note, folder, areChanges, setAreChanges, allFolders}) {
+function PreviewNote({ note, folder, areChanges, setAreChanges, allFolders}) {
      
     const crud = useContext(crudContext)
     const auth = useContext(authContext)
@@ -24,10 +24,11 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
         setOpenAlert(false);
     };
     const handleConfirmAlert = async () => {
+
         await crud.deleteUserNote(auth.user.displayName,`folders/${folder}/notes/${note.title}`)
         setAreChanges(!areChanges)
         setOpenAlert(false);
-        alert('Deleted');
+        // alert('Deleted? '+ auth.user.displayName + " " + `folders/${folder}/notes/${note.title}`);
     };
     const handleDialogOpen = () => {
         setOpenDialog(true);
@@ -37,7 +38,7 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
         const oldPath = `folders/${folder}/notes/${note.title.substring(0,30)}`
         const newPath = `folders/${newFolder}/notes/${note.title.substring(0,30)}`
 
-        console.log("La carpeta deberia moverse de ", folder, " a ", newFolder);
+        console.log("La carpeta deberia moverse de ", oldPath, " a ", newPath);
         await crud.updateUserNote(auth.user.displayName, oldPath ,newPath,note.title , note.content, note.date).then(()=>{setAreChanges(!areChanges)})
     }
     const handleDialogClose = () => {
@@ -48,9 +49,9 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
         setIsAddingFolder(true)
     }
 
-    const previewContent = content.replace(/&nbsp;/g, "").split(/<\/?[^>]+>/).filter(Boolean)
+    const previewContent = note.content.replace(/&nbsp;/g, "").split(/<\/?[^>]+>/).filter(Boolean)
     return (
-        <div className="np-sticky-note" style={{backgroundColor: stickyColor}}>
+        <div className="np-sticky-note" style={{backgroundColor: note.color}}>
         <Stack className="np-sn-icon" direction="row" spacing={0}>
             <IconButton onClick={handleDialogOpen} aria-label="addtofolder">
                 <Icon>add_circle</Icon>
@@ -67,9 +68,9 @@ function PreviewNote({stickyColor= '#FEFEFE', title="undefined", content="undefi
 
         <Link className='np-sticky-note-content' to='/draw' state={{ isNewNote: false, note: note, folder: folder}}   >
             
-            <h1>{title.length>25 ? title.slice(0,25) + "...": title}</h1>
+            <h1>{note.title.length>25 ? note.title.slice(0,25) + "...": note.title}</h1>
             {previewContent.map((parraph, index) => {return <p key={index}>{index===1 && (parraph.length>30?parraph.slice(0,50) + "...":parraph)}</p>})}
-            <p>{date}</p>
+            <p>{note.date}</p>
         </Link>
         </div>
     )

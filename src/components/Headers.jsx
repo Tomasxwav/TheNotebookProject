@@ -7,8 +7,7 @@ import { Link } from '../Link';
 
 export function Headers() {
     const auth = useContext(authContext)
-    const path = window.location.pathname;
-    const isLoginPath = path === '/';
+
 
     const handleLogout = () => {
         auth.logout()
@@ -22,7 +21,7 @@ export function Headers() {
                 The Note Project
                 </p>
             </div> 
-            {!isLoginPath && <a onClick={handleLogout} href='/'>Log out</a> }
+            {auth.user !== undefined && <a onClick={handleLogout} href='/'>Log out</a> }
         </header>
         </>
     )

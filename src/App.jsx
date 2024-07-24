@@ -21,7 +21,7 @@ function App() {
     },[auth])
 
 
-  console.log("Se Carga App");
+  // console.log("Se Carga App");
   // !user ? window.location.pathname = '/login' : {}
   return (
   <CrudProvider>

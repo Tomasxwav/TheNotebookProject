@@ -6,6 +6,7 @@ import { CrudProvider } from './context/CrudContext'
 
 import './css/styles.scss'
 import { Login } from './components/Log-in'
+import { Footer } from './components/Footer'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   <CrudProvider>
     <Headers/>
     {user ? <Displayer/> : <Login/>}
+    <Footer/>
   </CrudProvider>
     
   )

@@ -2,28 +2,28 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-  
+
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    
+
     background-color: #D9D9D9;
     background-color: #242424;
-  
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  
-  }
-  *,*::after {
-      margin: 0;
-  }
-  a {
+
+}
+*,*::after {
+    margin: 0;
+    
+}
+a {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.87);
-  }
-  
-  
+}
+
 .np-header {
     display: flex;
     align-items: center;
@@ -66,7 +66,7 @@
     // padding-left: 6rem;
     transition: 0.3s all ease;
     div {
-        width: 7rem;
+        min-width: 7rem;
         background-color: #585858;
         border: #242424;
         border-radius: 0.5rem;
@@ -135,16 +135,21 @@
       }
     
 }
+@media (max-width: 768px) {
+    .np-login {
+        form {
+            padding: 1rem;
+        }
+    }
+}
 
 
-  
     
 
 
 
 .np-content {
     display: flex;
-    height: 100vh;
     flex: 1;
 }
 .np-displayer {
@@ -161,18 +166,23 @@
 
 .np-main {
     width: 100%;
+    padding-bottom: 3rem;
+    min-height: 100vh;
 }
 
 
 
 .np-sidebar {
-    padding-top: 1rem;
+    padding-top: 3rem;
     align-items: center;
     text-align: center;
     background-color: #2c2c2c;
+    
+    background-size: -10%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    
 }
 
 .np-sidebar-option {
@@ -193,8 +203,6 @@
 
 
 
-
-
 .np-note {
     --ck-color-base-background: transparent;
     --ck-color-base-border:transparent;
@@ -206,8 +214,8 @@
     background-color: #e2f188;
     height: 200vh;
     display: flex;
-    flex: 1;
-    width: 100%;
+    // flex: 1;
+    width: 100vw;
     justify-content: center;
     h1,h2,h3,h4,p,a,tr,td {
         color: #000;
@@ -216,7 +224,6 @@
     .ck.ck-reset_all,
     .ck-reset_all *:not(.ck-reset_all-excluded *){
         width: 90%;
-        // flex: 1;
     }
     .ck-content, .ck-editor__editable {
         height: 180vh;
@@ -228,7 +235,6 @@
 }
 
 .np-sticky-note {
-    z-index: 2;
     display: flex;
     flex-direction: column;
     color: #242424;
@@ -237,15 +243,25 @@
     text-align: center;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 20%, 20% 0);
     opacity: 90%;
-    
     transition: 0.3s all ease;
     font-size: small;
-    .np-sn-icon {
-        position: absolute;
-        right: 0;
-        display: none;
-        z-index: 99;
+    .np-sn-topbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .np-sn-fold {
+            content: "";
+            width: 46px;
+            height: 46px;
+            background-color: rgba($color: #585858, $alpha: 0.2);
+        }
+        .np-sn-icon {
+            max-width: 80px;
+            height: auto;
+            display: none;
+        }
     }
+    
     h1 {
         line-height:normal;
         color: #242424 ;
@@ -259,22 +275,67 @@
         cursor: pointer;
     }
 }
-.np-sticky-note::before {
-    
-    position: sticky;
-    content: "";
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 100%, 100% 0);
-    left: 0;
-   
-    width: 46px;
-    height: 46px;
-    background-color: rgba($color: #585858, $alpha: 0.2);
-    z-index: 1;
-}
+
 .np-sticky-note:hover {
     .np-sn-icon {
         display: flex;
     }
     transform: scale(110%);
 }
+@media (max-width: 768px) {
+    .np-sidebar {
+        background-color: #242424;
+        background: linear-gradient(149deg, rgb(68, 68, 68) 0%, rgb(27, 27, 27) 35%, rgb(85, 85, 85) 100%);
+        position: fixed;
+        z-index: 1;
+        border-radius: 1rem;
+        min-height: 50vh;
+        left: -6rem;
+        padding-right: 1rem ;
+        transition: all 0.3s ease;
+    }
+    .np-displayer {
+        gap: 2rem 1rem;
+    }
 
+    .np-sticky-note {
+        width: 10rem;
+        height: 10rem;
+
+        .np-sn-topbar {
+            .np-sn-fold {
+                width: 33px;
+                height: 33px;
+            }
+            .np-sn-icon {
+                display: flex;
+            }
+        }
+        .np-sticky-note-content {
+            h1 {
+                font-size: 1rem;
+            }
+            p {
+                font-size: 0.5rem;
+            }
+        }
+    }
+}
+
+.footer {
+
+    width: 100%;
+    padding: 2rem 0;
+    border-top: 3px solid #000 ;
+    background-color: #2c2c2c;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    font-style: italic;
+    height: 20vh;
+    padding-left: 6rem;
+    p {
+        padding-bottom: 1rem;
+        color: white;
+    }
+}

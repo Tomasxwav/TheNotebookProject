@@ -9,6 +9,7 @@ import { crudContext } from "../context/CrudContext";
 import { authContext } from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 
+
 function PreviewNote({ note, folder, areChanges, setAreChanges, allFolders}) {
      
     const crud = useContext(crudContext)
@@ -52,26 +53,28 @@ function PreviewNote({ note, folder, areChanges, setAreChanges, allFolders}) {
     const previewContent = note.content.replace(/&nbsp;/g, "").split(/<\/?[^>]+>/).filter(Boolean)
     return (
         <div className="np-sticky-note" style={{backgroundColor: note.color}}>
-        <Stack className="np-sn-icon" direction="row" spacing={0}>
-            <IconButton onClick={handleDialogOpen} aria-label="addtofolder">
-                <Icon>add_circle</Icon>
-            </IconButton>
-            <IconButton onClick={handleClickOpen} aria-label="delete">
-                <DeleteIcon/>
-            </IconButton>
-        </Stack>
+            <div className="np-sn-topbar">
+            <div className="np-sn-fold"/>
+                <Stack className="np-sn-icon" direction="row" spacing={0}>
+                    <IconButton onClick={handleDialogOpen} aria-label="addtofolder">
+                        <Icon>add_circle</Icon>
+                    </IconButton>
+                    <IconButton onClick={handleClickOpen} aria-label="delete">
+                        <DeleteIcon/>
+                    </IconButton>
+                </Stack>
+            </div>
+            <AddTo allFolders={allFolders} currentFolder={folder} handleChange={handleChange} handleDialogClose={handleDialogClose} openDialog={openDialog} isAddingFolder={isAddingFolder} handleAddFolder={handleAddFolder}/>
 
-        <AddTo allFolders={allFolders} currentFolder={folder} handleChange={handleChange} handleDialogClose={handleDialogClose} openDialog={openDialog} isAddingFolder={isAddingFolder} handleAddFolder={handleAddFolder}/>
-
-        <DeleteDialog folders={folder} handleClickOpen={handleClickOpen} handleClose={handleClose} handleConfirmAlert={handleConfirmAlert} openAlert={openAlert}/> 
+            <DeleteDialog folders={folder} handleClickOpen={handleClickOpen} handleClose={handleClose} handleConfirmAlert={handleConfirmAlert} openAlert={openAlert}/> 
 
 
-        <Link className='np-sticky-note-content' to='/draw' state={{ isNewNote: false, note: note, folder: folder}}   >
-            
-            <h1>{note.title.length>25 ? note.title.slice(0,25) + "...": note.title}</h1>
-            {previewContent.map((parraph, index) => {return <p key={index}>{index===1 && (parraph.length>30?parraph.slice(0,50) + "...":parraph)}</p>})}
-            <p>{note.date}</p>
-        </Link>
+            <Link className='np-sticky-note-content' to='/draw' state={{ isNewNote: false, note: note, folder: folder}}   >
+                
+                <h1>{note.title.length>25 ? note.title.slice(0,25) + "...": note.title}</h1>
+                {previewContent.map((parraph, index) => {return <p key={index}>{index===1 && (parraph.length>30?parraph.slice(0,50) + "...":parraph)}</p>})}
+                <p>{note.date}</p>
+            </Link>
         </div>
     )
 }

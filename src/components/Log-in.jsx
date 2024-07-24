@@ -25,7 +25,7 @@ export function Login() {
                 const log = await auth.login(accountEmail, accountPassword); 
                 const user = await crud.readUserData(log.user.displayName)
                 console.log(user);
-                alert("Bienvenido " + user.username);
+                // alert("Bienvenido " + user.username);
                 window.location.href = '/'; 
                 
             } catch (error) {

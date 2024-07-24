@@ -4,15 +4,22 @@ import { Link } from '../Link.jsx'
 export function Sidebar() {
 
     const handleShow = (e) => {
-        // console.log(e);
-        if(e.movementX >= 1) {
+        
+        if(e.movementX === 1) {
             e.target.style.left = '0rem'
-        } else if (e.movementX <= -3) {
+            setTimeout(()=> {
+                document.querySelector('.np-sidebar').style.left = '-6rem'
+            }, 5000)
+        } else if (e.movementX === -3) {
             e.target.style.left = '-6rem' 
+            
         }
     }
     const handleHide = () => {
         document.querySelector('.np-sidebar').style.left = '0rem'
+        setTimeout(()=> {
+            document.querySelector('.np-sidebar').style.left = '-6rem'
+        }, 2000)
     }
 
 

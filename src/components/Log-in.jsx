@@ -26,7 +26,7 @@ export function Login() {
                 const user = await crud.readUserData(log.user.displayName)
                 console.log(user);
                 // alert("Bienvenido " + user.username);
-                window.location.href = '/notes'; 
+                window.location.href = '/'; 
                 
             } catch (error) {
                 console.error('Error al iniciar sesión');

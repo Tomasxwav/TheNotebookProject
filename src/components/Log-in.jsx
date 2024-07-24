@@ -6,10 +6,10 @@ import {Link} from '../Link.jsx'
 
 
 export function Login() {
-    console.log("Se carga login");
+    // console.log("Se carga login");
     const auth = useContext(authContext)
     const crud = useContext(crudContext)
-    console.log(2, auth.user);
+    // console.log(2, auth.user);
 
     const [accountEmail, setAccountEmail] = useState("")
     const [accountPassword, setAccountPassword] = useState("")

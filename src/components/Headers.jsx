@@ -21,7 +21,7 @@ export function Headers() {
                 The Note Project
                 </p>
             </div> 
-            {auth.user !== undefined && <a onClick={handleLogout} href='/'>Log out</a> }
+            {auth.user === undefined && <a onClick={handleLogout} href='/'>Log out</a> }
         </header>
         </>
     )

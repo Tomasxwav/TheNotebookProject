@@ -17,7 +17,7 @@ function App() {
   return (
   <CrudProvider>
     <Headers/>
-    {user ? <Displayer/> : <Login/>}
+    {user ? <Displayer/> : <div className='np-main'><Login/></div>}
     <Footer/>
   </CrudProvider>
     

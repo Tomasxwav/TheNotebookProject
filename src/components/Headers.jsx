@@ -1,12 +1,19 @@
 import Icons from '../icons/Icons'
 import { authContext } from "../context/AuthContext";
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from '../Link';
 
 
 
 export function Headers() {
     const auth = useContext(authContext)
+    const [isLogin, setIsLogin] = useState(undefined)
+
+    useEffect(() => {
+        if(auth.user) {
+            setIsLogin(auth.user)
+        }
+    },[auth])
 
 
     const handleLogout = () => {
@@ -21,7 +28,7 @@ export function Headers() {
                 The Note Project
                 </p>
             </div> 
-            {auth.user === undefined && <a onClick={handleLogout} href='/'>Log out</a> }
+            {isLogin !== undefined && <a onClick={handleLogout} href='/'>Log out</a> }
         </header>
         </>
     )
